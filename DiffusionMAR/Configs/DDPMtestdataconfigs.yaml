@@ -1,0 +1,31 @@
+paths:
+    data_path_train: "/home/s1736191/myjupyter/DiffusionMAR/Data/Test_Data_64/train"
+    data_path_val: "/home/s1736191/myjupyter/DiffusionMAR/Data/Test_Data_64/val"
+    save_path: "/home/s1736191/myjupyter/DiffusionMAR/Results/"
+trainingparams:
+    epochs: 25
+    batch_size: 128
+    learning_rate: 0.00005
+    img_resized: 64
+model:
+  use_condition: False
+  DDPM:
+    params:
+      num_timesteps: 1000 # T
+      
+      loss_type: 'l2' # options {'ssim', 'l2'}
+      
+      UNetParams:
+        spatial_dims: 2
+        in_channels: 2
+        out_channels: 1
+        num_channels: !!python/tuple
+          - 128
+          - 256
+          - 256
+        attention_levels: !!python/tuple
+          - False
+          - True
+          - True
+        num_res_blocks: 1
+        num_head_channels: 256

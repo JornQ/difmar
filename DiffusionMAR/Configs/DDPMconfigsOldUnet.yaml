@@ -1,0 +1,31 @@
+paths:
+    data_path_train: "/home/s1736191/myjupyter/DiffusionMAR/Data/Isala_2/train"
+    data_path_val: "/home/s1736191/myjupyter/DiffusionMAR/Data/Isala_2/val"
+    save_path: "/home/s1736191/myjupyter/DiffusionMAR/Results/"
+trainingparams:
+    epochs: 10
+    batch_size: 8
+    learning_rate: 0.00005
+    img_resized: 256
+model:
+  use_diffusion: True
+  DDPM:
+    params:
+      num_timesteps: 1000 # T
+      
+      loss_type: 'ssim' # options {'ssim'}
+      
+      UNetParams:
+        spatial_dims: 2
+        in_channels: 2
+        out_channels: 1
+        num_channels: !!python/tuple
+          - 32
+          - 64
+          - 128
+        attention_levels: !!python/tuple
+          - False
+          - False
+          - True
+        num_res_blocks: 1
+        num_head_channels: 64

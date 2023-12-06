@@ -1,0 +1,48 @@
+paths:
+    data_path_train: "/home/s1736191/myjupyter/DiffusionMAR/Data/Isala_2/train"
+    data_path_val: "/home/s1736191/myjupyter/DiffusionMAR/Data/Isala_2/val"
+    save_path: "/home/s1736191/myjupyter/DiffusionMAR/Results/"
+trainingparams:
+    data_fraction: 0.01
+    epochs: 150
+    batch_size: 8
+    learning_rate: 0.00005
+    img_resized: 256
+model:
+  # test_unet_exclusive overwrites model.use_condition to False if True
+  test_unet_exclusive: True
+  
+  # use_condition overwrites UNetParams.in_channels to 2 if True and to 1 if False
+  use_condition: True
+  
+  scheduler: 'linear_beta' #options {'linear_beta', 'cosine'}
+  
+  DDPM:
+    params:
+      num_timesteps: 1000 # T
+      
+      loss_type: 'ssim' # options {'l1', 'l2', 'ssim'}
+      
+    UNetParams:
+      image_size: 256
+      in_channels: 1
+      model_channels: 64
+      out_channels: 1
+      num_res_blocks: 2
+      attention_resolutions: !!python/tuple
+        - 32
+        - 16
+        - 8
+      channel_mult: !!python/tuple
+        - 1
+        - 2
+        - 4
+      conv_resample: True
+      dims: 2
+      num_heads: 8
+      num_head_channels: 64
+      use_scale_shift_norm: True
+      resblock_updown: True
+      use_spatial_transformer: False
+      context_dim:
+      condition_key: "nocond" # options {"SpatialRescaler", "first_stage", "nocond"}
