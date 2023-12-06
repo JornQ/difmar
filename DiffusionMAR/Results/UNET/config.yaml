@@ -1,0 +1,40 @@
+model:
+  DDPM:
+    UNetParams:
+      attention_resolutions: !!python/tuple
+      - 32
+      - 16
+      - 8
+      channel_mult: !!python/tuple
+      - 1
+      - 2
+      - 4
+      condition_key: nocond
+      context_dim: null
+      conv_resample: true
+      dims: 2
+      image_size: 256
+      in_channels: 1
+      model_channels: 64
+      num_head_channels: 64
+      num_heads: 8
+      num_res_blocks: 2
+      out_channels: 1
+      resblock_updown: true
+      use_scale_shift_norm: true
+      use_spatial_transformer: false
+    params:
+      loss_type: ssim
+      num_timesteps: 1000
+  scheduler: linear_beta
+  test_unet_exclusive: true
+  use_condition: false
+paths: 
+  data_path_train: /home/s1736191/myjupyter/DiffusionMAR/Data/Isala_2/train
+  data_path_val: /home/s1736191/myjupyter/DiffusionMAR/Data/Isala_2/val
+  save_path: /home/s1736191/myjupyter/DiffusionMAR/Results/
+trainingparams: 
+  batch_size: 8
+  epochs: 15
+  img_resized: 256
+  learning_rate: 5.0e-05
